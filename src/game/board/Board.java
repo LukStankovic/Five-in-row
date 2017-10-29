@@ -5,9 +5,9 @@
  */
 package game.board;
 
-import exceptions.CheaterException;
-import exceptions.OutOfBoardException;
-import exceptions.SymbolAlreadyThereException;
+import game.exceptions.CheaterException;
+import game.exceptions.OutOfBoardException;
+import game.exceptions.SymbolAlreadyThereException;
 import game.player.Move;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,10 +20,10 @@ public class Board {
     private int boardSize;
     private BoardSymbol[][] board;
 	private BoardSymbol latestSymbol;
-	private int countSymbols = 0;
+	private int countOfSymbols = 0;
 
 	public int getCountSymbols() {
-		return countSymbols;
+		return countOfSymbols;
 	}
 
     public Board(int boardSize) {
@@ -38,28 +38,22 @@ public class Board {
     public BoardSymbol getSymbolAtPosition(int x, int y){
         return board[x][y];
     }
+
+	public int getCountOfSymbols() {
+		return countOfSymbols;
+	}
     
-    public boolean setSymbolAccordingToMove(Move move) {
+	
+    public void setSymbolAccordingToMove(Move move, int count) {
 		if (!isInBoard(move.getPositionX(), move.getPositionY())) {
 			throw new OutOfBoardException();
-		}
-		
-        if(board[move.getPositionX()][move.getPositionY()] == null){
-			
-			try {
-				if (move.getSymbol() == this.latestSymbol) {
-					throw new CheaterException();
-				}
-			} catch (CheaterException e) {
-				System.err.println(e.getMessage());
-				return false;
-			}
-			
-            board[move.getPositionX()][move.getPositionY()] = move.getSymbol();
-			this.latestSymbol = move.getSymbol();
-			return true;
+		} else if(board[move.getPositionX()][move.getPositionY()] != null){
+            throw new SymbolAlreadyThereException();
+		} else if (count != countOfSymbols) {
+			throw new CheaterException();
         }else{
-			throw new SymbolAlreadyThereException();
+			board[move.getPositionX()][move.getPositionY()] = move.getSymbol();
+			countOfSymbols++;
         }
     }
     
@@ -85,5 +79,5 @@ public class Board {
         }
         return sb.toString(); 
     } 
-	
+
 }

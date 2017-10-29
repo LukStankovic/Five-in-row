@@ -42,7 +42,7 @@ public class Player implements Comparable<Player>{
 
 	@Override
 	public String toString() {
-		return ai.getName() + " " + wins + " " + ties + " " + looses + " " + points;
+		return ai.getName() + " w:" + wins + ", t:" + ties + ", l:" + looses + ", p:" + points;
 	}
 
 	@Override

@@ -5,12 +5,13 @@
  */
 package gui;
 
-import exceptions.CheaterException;
-import exceptions.OutOfBoardException;
-import exceptions.SymbolAlreadyThereException;
+import game.exceptions.CheaterException;
+import game.exceptions.OutOfBoardException;
+import game.exceptions.SymbolAlreadyThereException;
 import game.GUIGame;
 import game.board.Board;
 import game.board.BoardSymbol;
+import game.player.InteligentPlayer;
 import game.player.Move;
 import game.player.Player1;
 import game.player.Player3;
@@ -153,7 +154,7 @@ public class Window extends javax.swing.JFrame {
 			jLabel2.setText("");
 			boardSize = Integer.parseInt(jTextField1.getText());
 			humanFirst = jRadioButton1.isSelected();
-			game = new GUIGame(boardSize, new Player3());
+			game = new GUIGame(boardSize, new InteligentPlayer());
 			repaint();
 			if (!humanFirst) {
 				PCMove();
@@ -167,19 +168,15 @@ public class Window extends javax.swing.JFrame {
 			int positionOnBoardX = (evt.getX() - topXShift) / ((this.getWidth() - topXShift - bottomXShift)/boardSize);
 			int positionOnBoardY = (evt.getY() - topYShift) / ((this.getHeight() - topYShift - bottomYShift)/boardSize);
 			
-			try { 
-				do {
-					repaint();
-				} while(!isGameOver && humanMove(positionOnBoardX, positionOnBoardY));
-
+			do {
 				repaint();
+			} while(!isGameOver && humanMove(positionOnBoardX, positionOnBoardY));
 
-				do {
-					repaint();
-				} while(!isGameOver && PCMove());
-			} catch (SymbolAlreadyThereException | OutOfBoardException e) {
-				System.err.println(e.getMessage());
-			}
+			repaint();
+			do {
+				repaint();
+			} while(!isGameOver && PCMove());
+			
 		}
     }//GEN-LAST:event_formMouseReleased
 	
@@ -212,7 +209,7 @@ public class Window extends javax.swing.JFrame {
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		ArrayList<Player> players = new ArrayList<>();
+		/*ArrayList<Player> players = new ArrayList<>();
 		players.add(new Player(new StupidPlayer()));
 		players.add(new Player(new Player1()));
 		players.add(new Player(new StupidPlayer()));
@@ -222,8 +219,8 @@ public class Window extends javax.swing.JFrame {
 		System.out.println(t);
 		t.playTournament();
 		System.out.println(t);
-		
-	/*	try {
+		*/
+		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
 					javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -240,13 +237,13 @@ public class Window extends javax.swing.JFrame {
 			java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
-*/
+
 		/* Create and display the form */
-	/*	java.awt.EventQueue.invokeLater(new Runnable() {
+		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new Window().setVisible(true);
 			}
-		});*/
+		});
 	}
 
 	private final int topXShift = 20;

@@ -5,7 +5,7 @@
  */
 package game.player;
 
-import exceptions.CheaterException;
+import game.exceptions.CheaterException;
 import game.board.Board;
 import game.board.BoardSymbol;
 import java.util.Random;
@@ -26,7 +26,7 @@ public class Player3 implements IMove{
             pozX = rand.nextInt(board.getBoardSize());
             pozY = rand.nextInt(board.getBoardSize());
             if(board.getSymbolAtPosition(pozX, pozY) == null) {
-				board.setSymbolAccordingToMove(new Move(pozX, pozY, yourTurn));
+				board.setSymbolAccordingToMove(new Move(pozX, pozY, yourTurn), board.getCountOfSymbols());
 			}
         }
         do{

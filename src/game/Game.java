@@ -5,9 +5,11 @@
  */
 package game;
 
-import exceptions.CheaterException;
+import game.exceptions.CheaterException;
 import game.board.Board;
 import game.board.BoardSymbol;
+import game.exceptions.OutOfBoardException;
+import game.exceptions.SymbolAlreadyThereException;
 import game.player.IMove;
 import game.player.Move;
 import java.util.logging.Level;
@@ -35,10 +37,16 @@ public class Game {
 				if (makeMove(player1, BoardSymbol.CIRCLE)) {
 					return player1;
 				}
-			} catch (RuntimeException e) {
+			} catch (OutOfBoardException e) {
 				e.getMessage();
 				return player2;
-			} // todo count symbols
+			} catch (SymbolAlreadyThereException e) {
+				e.getMessage();
+				return player2;
+			} catch (CheaterException e) {
+				e.getMessage();
+				return player2;
+			}
 			if (board.getCountSymbols() == board.getBoardSize() * board.getBoardSize()) {
 				return null;
 			}
@@ -47,7 +55,13 @@ public class Game {
 				if (makeMove(player2, BoardSymbol.CROSS)) {
 					return player2;
 				}
-			} catch (RuntimeException e) {
+			} catch (OutOfBoardException e) {
+				e.getMessage();
+				return player1;
+			} catch (SymbolAlreadyThereException e) {
+				e.getMessage();
+				return player1;
+			} catch (CheaterException e) {
 				e.getMessage();
 				return player1;
 			}
@@ -55,8 +69,9 @@ public class Game {
     }
 	
 	protected boolean makeMove(IMove player, BoardSymbol symbol) {
+		int count = board.getCountOfSymbols();
         Move move = player.makeMove(board, symbol);
-		board.setSymbolAccordingToMove(move);
+		board.setSymbolAccordingToMove(move, count);
 		return isWinner(board, move, player2);
 	}
 

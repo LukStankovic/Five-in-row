@@ -1,11 +1,11 @@
 
-package exceptions;
+package game.exceptions;
 
 /**
  *
  * @author lukstankovic
  */
-public class CheaterException extends Exception {
+public class CheaterException extends RuntimeException {
 
 	@Override
 	public String getMessage() {

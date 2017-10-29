@@ -5,9 +5,11 @@
  */
 package game;
 
-import exceptions.CheaterException;
+import game.exceptions.CheaterException;
 import game.board.Board;
 import game.board.BoardSymbol;
+import game.exceptions.OutOfBoardException;
+import game.exceptions.SymbolAlreadyThereException;
 import game.player.Human;
 import game.player.IMove;
 import game.player.Move;
@@ -23,14 +25,30 @@ public class GUIGame extends Game {
 	}
 	
 	public boolean makeMove(Move move) {
-		if (!board.setSymbolAccordingToMove(move)) {
-			return false;
+		try {
+			board.setSymbolAccordingToMove(move, board.getCountOfSymbols());
+			return isWinner(board, move, player2);
+		} catch (OutOfBoardException e) {
+			System.err.println(e.getMessage());
+		} catch (SymbolAlreadyThereException e) {
+			System.err.println(e.getMessage());
+		} catch (CheaterException e) {
+			System.err.println(e.getMessage());
 		}
-		return isWinner(board, move, player2);
+		return false;
 	}
 	
 	public boolean makeMove(BoardSymbol symbol) {
-		return makeMove(player1, symbol);
+		try {
+			return makeMove(player1, symbol);
+		} catch (OutOfBoardException e) {
+			System.err.println(e.getMessage());
+		} catch (SymbolAlreadyThereException e) {
+			System.err.println(e.getMessage());
+		} catch (CheaterException e) {
+			System.err.println(e.getMessage());
+		}
+		return false;
 	}
 
 	public Board getBoard() {
