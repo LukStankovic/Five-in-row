@@ -70,7 +70,6 @@ public class Sta0445 implements IMove {
 		int max = Integer.MIN_VALUE;
 		int min = Integer.MAX_VALUE;
 		
-		//System.out.println(board);
 		for (Move availablePosition : availablePositions) {
 			Board deepBoard = boardCopy(board);
 			int val;
@@ -118,62 +117,6 @@ public class Sta0445 implements IMove {
 	
 	
 	
-	/*
-	private int getMax(Board board, BoardSymbol yourSymbol, int depth) {
-		int maxScore = Integer.MIN_VALUE;
-		for (int i = 0; i < board.getBoardSize(); i++) {
-			for (int j = 0; j < board.getBoardSize(); j++) {
-				if (board.getSymbolAtPosition(j, i) == null) {
-					Board boardCopy = boardCopy(board);
-					boardCopy.setSymbolAccordingToMove(new Move(j, i, yourSymbol), boardCopy.getCountSymbols());
-					//System.out.println(boardCopy);
-					int score = miniMax(boardCopy, yourSymbol, depth);
-					
-					if (score > maxScore) {
-						maxScore = score;
-						bestMove = new Move(j, i, yourSymbol);
-					}
-					
-				} 
-			}
-		}
-		System.out.println("max: " + maxScore);
-		return maxScore;
-	}
-	
-	private int getMin(Board board, BoardSymbol yourSymbol, int depth) {
-		int minScore = Integer.MAX_VALUE;
-		for (int i = 0; i < board.getBoardSize(); i++) {
-			for (int j = 0; j < board.getBoardSize(); j++) {
-				if (board.getSymbolAtPosition(j, i) == null) {		
-					Board boardCopy = boardCopy(board);
-					boardCopy.setSymbolAccordingToMove(new Move(j, i, yourSymbol), boardCopy.getCountSymbols());
-				//	System.out.println(boardCopy);
-					int score = miniMax(boardCopy, yourSymbol, depth);
-					if (score < minScore) {
-						minScore = score;
-						bestMove = new Move(j, i, yourSymbol);
-					}
-					
-				} 
-			}
-		}System.out.println("min: " + minScore);
-
-		
-		return minScore;
-	}
-
-	private int score(Board board, Move move) {		
-		if (isWinner(board, move)  && move.getSymbol() == intelligentPlayerSymbol) {
-			return 10;
-		} else if (isWinner(board, move) && move.getSymbol() != intelligentPlayerSymbol) {
-			return -10;
-		} 
-		
-		return 0;
-	}
-
-	*/
 	private Board boardCopy(Board board) {
 		Board copiedBoard = new Board(board.getBoardSize());
 		for (int i = 0; i < copiedBoard.getBoardSize(); i++) {
@@ -216,8 +159,7 @@ public class Sta0445 implements IMove {
 		
 		return board.getSymbolAtPosition(x, y) == symbol;
 	}
-	
-	
+		
 	private Move copyMove(Move move) {
 		return new Move(move.getPositionX(), move.getPositionY(), move.getSymbol());
 	}
