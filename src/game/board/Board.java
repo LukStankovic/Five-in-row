@@ -20,10 +20,10 @@ public class Board {
     private int boardSize;
     private BoardSymbol[][] board;
 	private BoardSymbol latestSymbol;
-	private int countOfSymbols = 0;
+	private int symbolCounts = 0;
 
-	public int getCountSymbols() {
-		return countOfSymbols;
+	public int getSymbolCounts() {
+		return symbolCounts;
 	}
 
     public Board(int boardSize) {
@@ -39,9 +39,6 @@ public class Board {
         return board[x][y];
     }
 
-	public int getCountOfSymbols() {
-		return countOfSymbols;
-	}
     
 	
     public void setSymbolAccordingToMove(Move move, int count) {
@@ -49,11 +46,11 @@ public class Board {
 			throw new OutOfBoardException();
 		} else if(board[move.getPositionX()][move.getPositionY()] != null){
             throw new SymbolAlreadyThereException();
-		} else if (count != countOfSymbols) {
+		} else if (count != symbolCounts) {
 			throw new CheaterException();
         }else{
 			board[move.getPositionX()][move.getPositionY()] = move.getSymbol();
-			countOfSymbols++;
+			symbolCounts++;
         }
     }
     
