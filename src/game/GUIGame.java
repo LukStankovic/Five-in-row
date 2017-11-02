@@ -31,7 +31,8 @@ public class GUIGame extends Game {
 		} catch (OutOfBoardException e) {
 			System.err.println(e.getMessage());
 		} catch (SymbolAlreadyThereException e) {
-			System.err.println(e.getMessage());
+			System.err.println(e.getMessage() + "[" + move.getPositionX() + ", " + move.getPositionY() + "]");
+			
 		} catch (CheaterException e) {
 			System.err.println(e.getMessage());
 		}

@@ -47,7 +47,7 @@ public class Game {
 				e.getMessage();
 				return player2;
 			}
-			if (board.getCountSymbols() == board.getBoardSize() * board.getBoardSize()) {
+			if (board.getSymbolCounts() == board.getBoardSize() * board.getBoardSize()) {
 				return null;
 			}
 			System.out.println(board);

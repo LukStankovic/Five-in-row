@@ -15,6 +15,7 @@ import game.player.InteligentPlayer;
 import game.player.Move;
 import game.player.Player1;
 import game.player.Player3;
+import game.player.Sta0445;
 import game.player.StupidPlayer;
 import game.tournament.Player;
 import game.tournament.Tournament;
@@ -154,7 +155,7 @@ public class Window extends javax.swing.JFrame {
 			jLabel2.setText("");
 			boardSize = Integer.parseInt(jTextField1.getText());
 			humanFirst = jRadioButton1.isSelected();
-			game = new GUIGame(boardSize, new InteligentPlayer());
+			game = new GUIGame(boardSize, new Sta0445());
 			repaint();
 			if (!humanFirst) {
 				PCMove();
@@ -211,8 +212,14 @@ public class Window extends javax.swing.JFrame {
 	public static void main(String args[]) {
 		/*ArrayList<Player> players = new ArrayList<>();
 		players.add(new Player(new StupidPlayer()));
-		players.add(new Player(new Player1()));
 		players.add(new Player(new StupidPlayer()));
+		players.add(new Player(new StupidPlayer()));
+		players.add(new Player(new StupidPlayer()));
+		players.add(new Player(new StupidPlayer()));
+		players.add(new Player(new StupidPlayer()));
+		players.add(new Player(new StupidPlayer()));
+		players.add(new Player(new StupidPlayer()));
+		players.add(new Player(new Sta0445()));
 		
 		
 		Tournament t = new Tournament(players);

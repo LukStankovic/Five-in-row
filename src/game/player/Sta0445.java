@@ -76,7 +76,7 @@ public class Sta0445 implements IMove {
 		
 			if (symbol == intelligentPlayerSymbol) {
 				Move deepMove = new Move(availablePosition.getPositionX(), availablePosition.getPositionY(), symbol);
-				deepBoard.setSymbolAccordingToMove(deepMove, deepBoard.getCountSymbols());	
+				deepBoard.setSymbolAccordingToMove(deepMove, deepBoard.getSymbolCounts());	
 				val = miniMax(deepBoard, deepMove, opponentSymbol, depth+1);
 				if (val > max) {
 					max = val;
@@ -84,7 +84,7 @@ public class Sta0445 implements IMove {
 				return max;
 			} else {
 				Move deepMove = new Move(availablePosition.getPositionX(), availablePosition.getPositionY(), symbol);
-				deepBoard.setSymbolAccordingToMove(deepMove, deepBoard.getCountSymbols());	
+				deepBoard.setSymbolAccordingToMove(deepMove, deepBoard.getSymbolCounts());	
 				val = miniMax(deepBoard, deepMove, intelligentPlayerSymbol, depth+1);
 				if (val < min) {
 					min = val;
@@ -121,7 +121,7 @@ public class Sta0445 implements IMove {
 		Board copiedBoard = new Board(board.getBoardSize());
 		for (int i = 0; i < copiedBoard.getBoardSize(); i++) {
 			for (int j = 0; j < copiedBoard.getBoardSize(); j++) {
-				copiedBoard.setSymbolAccordingToMove(new Move(j, i, board.getSymbolAtPosition(j, i)), copiedBoard.getCountOfSymbols());
+				copiedBoard.setSymbolAccordingToMove(new Move(j, i, board.getSymbolAtPosition(j, i)), copiedBoard.getSymbolCounts());
 			}
 		}
 		return copiedBoard;
