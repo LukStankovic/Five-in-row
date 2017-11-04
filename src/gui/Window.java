@@ -19,8 +19,22 @@ import game.player.StupidPlayer;
 import game.tournament.Player;
 import game.tournament.Tournament;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import java.io.File; 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -43,36 +57,16 @@ public class Window extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem4 = new javax.swing.JRadioButtonMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        buttonGroup4 = new javax.swing.ButtonGroup();
-        buttonGroup5 = new javax.swing.ButtonGroup();
-        buttonGroup6 = new javax.swing.ButtonGroup();
-        buttonGroup7 = new javax.swing.ButtonGroup();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
-
-        jRadioButtonMenuItem2.setSelected(true);
-        jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
-
-        jRadioButtonMenuItem3.setSelected(true);
-        jRadioButtonMenuItem3.setText("jRadioButtonMenuItem3");
-
-        jRadioButtonMenuItem4.setSelected(true);
-        jRadioButtonMenuItem4.setText("jRadioButtonMenuItem4");
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Piškvorky");
@@ -105,23 +99,50 @@ public class Window extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel2.setToolTipText("");
 
+        jButton2.setText("Uložit");
+        jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Načíst");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Screenshot");
+        jButton4.setEnabled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(701, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jRadioButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(743, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jRadioButton2)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jRadioButton1)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,9 +157,15 @@ public class Window extends javax.swing.JFrame {
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -149,20 +176,29 @@ public class Window extends javax.swing.JFrame {
 	GUIGame game;
 	
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (game == null || isGameOver) {
-			isGameOver = false;
-			jLabel2.setText("");
-			boardSize = Integer.parseInt(jTextField1.getText());
+		if (game == null || isGameOver) {
 			humanFirst = jRadioButton1.isSelected();
-			game = new GUIGame(boardSize, new InteligentPlayer());
-			repaint();
-			if (!humanFirst) {
-				PCMove();
-			}
+			startGame(Integer.parseInt(jTextField1.getText()), jRadioButton1.isSelected());
 		} 
 		
     }//GEN-LAST:event_jButton1ActionPerformed
 
+	private void startGame(int boardSize, Boolean hFirst) {
+		isGameOver = false;
+		jLabel2.setText("");
+		this.boardSize = boardSize;
+		game = new GUIGame(boardSize, new StupidPlayer());
+		
+		jButton2.setEnabled(true); // save
+		jButton3.setEnabled(false); // load
+		jButton4.setEnabled(true); // screen
+		repaint();
+		if (!hFirst) {
+			PCMove();
+		}
+
+	}
+	
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
 		if (game != null && !isGameOver) {
 			int positionOnBoardX = (evt.getX() - topXShift) / ((this.getWidth() - topXShift - bottomXShift)/boardSize);
@@ -179,6 +215,108 @@ public class Window extends javax.swing.JFrame {
 			
 		}
     }//GEN-LAST:event_formMouseReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+		if (game != null) {
+			Board board = game.getBoard();
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Uložit hru");   
+
+			int userSelection = fileChooser.showSaveDialog(this);
+
+			if (userSelection == JFileChooser.APPROVE_OPTION) {
+				File fileToSave = fileChooser.getSelectedFile();
+				PrintWriter in = null;
+				try {
+					in = new PrintWriter(new FileWriter(fileToSave.getAbsolutePath()));
+
+					for (int i = 0; i < board.getBoardSize(); i++) {
+						for (int j = 0; j < board.getBoardSize(); j++) {
+							if (board.getSymbolAtPosition(j, i) == BoardSymbol.CIRCLE) {
+								in.write("O");
+							} else if (board.getSymbolAtPosition(j, i) == BoardSymbol.CROSS) {
+								in.write("X");
+							} else {
+								in.write(".");
+							}
+						}
+						in.println();
+					}
+
+				} catch (IOException ex) {
+					Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+				} finally {
+					if (in != null) {
+						in.close();
+					}
+				}
+			}
+		}
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+		if (game == null || isGameOver) {
+			JFileChooser fileChooser = new JFileChooser();
+			int result = fileChooser.showOpenDialog(this);
+			if (result == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = fileChooser.getSelectedFile();
+				Scanner in = null;
+				try {
+					in = new Scanner(new BufferedReader(new FileReader(selectedFile.getAbsolutePath())));
+					int j = 0;
+					startGame(in.nextLine().split("").length, true);
+					Board board = game.getBoard();
+					while (in.hasNextLine()) {
+						String[] oneLine = in.nextLine().split("");
+						for(int i =0; i < oneLine.length; i++){
+							System.out.println();
+							if (oneLine[i].trim().equals("X")) {
+								board.setSymbolAccordingToMove(new Move(j, i, BoardSymbol.CROSS), board.getCountSymbols());
+							} else if (oneLine[i].trim().equals("O")) {
+								board.setSymbolAccordingToMove(new Move(j, i, BoardSymbol.CIRCLE), board.getCountSymbols());
+							}
+						}
+						j++;
+					}
+					repaint();
+				} catch (FileNotFoundException ex) {
+					Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+				} finally {
+					if (in != null) {
+						in.close();
+					}
+				}
+			}
+		}
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+/*
+		BufferedImage img = new BufferedImage (this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics g = img.getGraphics ();
+		jFrame1.paint(g);
+		g.dispose();
+		try{
+			ImageIO.write(img, "jpg", new File ("screenshot.jpg"));
+		}
+		catch (IOException ex){
+			ex.printStackTrace ();
+		}*/
+		BufferedImage img = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		this.paint(img.getGraphics());
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Uložit screenshot");   
+		int userSelection = fileChooser.showSaveDialog(this);
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+				File fileToSave = fileChooser.getSelectedFile();
+			try {
+				ImageIO.write(img, "png", fileToSave);
+			} catch (IOException ex) {
+				Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		
+    }//GEN-LAST:event_jButton4ActionPerformed
 	
 	
 	private boolean humanMove(int posX, int posY) {
@@ -188,6 +326,9 @@ public class Window extends javax.swing.JFrame {
 			repaint();
 			isGameOver = true;
 			jButton1.setText("Nová hra");
+			jButton2.setEnabled(false); // save
+			jButton3.setEnabled(true); // load
+			jButton4.setEnabled(true); // screen
 			return true;
 		} 
 		return false;
@@ -200,6 +341,9 @@ public class Window extends javax.swing.JFrame {
 			repaint();
 			isGameOver = true;
 			jButton1.setText("Nová hra");
+			jButton2.setEnabled(false); // save
+			jButton3.setEnabled(true); // load
+			jButton4.setEnabled(true); // screen
 			return true;
 		}
 		return false;
@@ -280,22 +424,14 @@ public class Window extends javax.swing.JFrame {
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.ButtonGroup buttonGroup5;
-    private javax.swing.ButtonGroup buttonGroup6;
-    private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem4;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
@@ -317,7 +453,7 @@ public class Window extends javax.swing.JFrame {
 					int positionYTo = (int)(((double)(this.getHeight() - topYShift - bottomYShift) / boardSize) * (j+1)) + topYShift;
 					g.setColor(Color.blue);
 					g.drawLine(positionXFrom, positionYFrom, positionXTo, positionYTo);
-				g	.drawLine(positionXTo, positionYFrom, positionXFrom, positionYTo);
+					g.drawLine(positionXTo, positionYFrom, positionXFrom, positionYTo);
 				}
 			}
 		}
